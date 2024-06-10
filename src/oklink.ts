@@ -288,11 +288,43 @@ export class Oklink {
   }
 
   async batchAddressBalances(addresses: Address[]) {
+    if (addresses.length > 100) {
+      throw new Error("The maximum number of addresses is 100");
+    }
     const params = new URLSearchParams({
       chainShortName: chainShortName,
       addresses: addresses.join(","),
     });
     const url = `${this.baseUrl}api/v5/explorer/address/balance-multi?${params}`;
+    const response = await fetch(url, {
+      headers: this.header(),
+    });
+    return response.json();
+  }
+
+  async batchAddressTokenBalances(
+    addresses: Address[],
+    protocolType?: ProtocolType,
+    page?: string,
+    limit?: string
+  ) {
+    if (addresses.length > 50) {
+      throw new Error("The maximum number of addresses is 50");
+    }
+    const params = new URLSearchParams({
+      chainShortName: chainShortName,
+      addresses: addresses.join(","),
+    });
+    if (!!protocolType) {
+      params.append("protocolType", protocolType);
+    }
+    if (!!page) {
+      params.append("page", page);
+    }
+    if (!!limit) {
+      params.append("limit", limit);
+    }
+    const url = `${this.baseUrl}api/v5/explorer/address/token-balance-multi?${params}`;
     const response = await fetch(url, {
       headers: this.header(),
     });
