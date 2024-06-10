@@ -1,0 +1,10 @@
+{
+  "name": "@blockcmd/scans-ts",
+  "version": "0.0.2",
+  "description": "An asyncronous Typescript library for interacting with all known block explorers",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "/dist"
+  ]
+}
