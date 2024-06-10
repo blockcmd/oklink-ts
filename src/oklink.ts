@@ -257,7 +257,7 @@ export class Oklink {
     const params = new URLSearchParams({
       chainShortName: chainShortName,
       address: address,
-      protocolType: protocolType.toString(),
+      protocolType: protocolType,
     });
     if (!!tokenContractAddress) {
       params.append("tokenContractAddress", tokenContractAddress);
@@ -269,6 +269,18 @@ export class Oklink {
       params.append("limit", limit);
     }
     const url = `${this.baseUrl}api/v5/explorer/address/token-transaction-list?${params}`;
+    const response = await fetch(url, {
+      headers: this.header(),
+    });
+    return response.json();
+  }
+
+  async addressEntityLabels(address: Address) {
+    const params = new URLSearchParams({
+      chainShortName: chainShortName,
+      address: address,
+    });
+    const url = `${this.baseUrl}api/v5/explorer/address/entity-labels?${params}`;
     const response = await fetch(url, {
       headers: this.header(),
     });
