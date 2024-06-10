@@ -71,7 +71,7 @@ export class Oklink {
     const params: Record<string, any>  = new URLSearchParams({
       chainShortName: chainShortName,
       address: address,
-      protocolType: protocolType.toString(),
+      protocolType: protocolType,
     });
     if (!!tokenContractAddress) {
       params.append("tokenContractAddress", tokenContractAddress);
@@ -99,7 +99,7 @@ export class Oklink {
     const params = new URLSearchParams({
       chainShortName: chainShortName,
       address: address,
-      protocolType: protocolType.toString(),
+      protocolType: protocolType,
     });
     if (!!tokenContractAddress) {
       params.append("tokenContractAddress", tokenContractAddress);
@@ -111,6 +111,164 @@ export class Oklink {
       params.append("limit", limit);
     }
     const url = `${this.baseUrl}api/v5/explorer/address/address-balance-fills?${params}`;
+    const response = await fetch(url, {
+      headers: this.header(),
+    });
+    return response.json();
+  }
+
+  async addressBalanceHistory(
+    address: Address,
+    height: string,
+    tokenContractAddress?: Address,
+  ) {
+    const params = new URLSearchParams({
+      chainShortName: chainShortName,
+      address: address,
+      height: height,
+    });
+    if (!!tokenContractAddress) {
+      params.append("tokenContractAddress", tokenContractAddress);
+    }
+    const url = `${this.baseUrl}api/v5/explorer/block/address-balance-history?${params}`;
+    const response = await fetch(url, {
+      headers: this.header(),
+    });
+    return response.json();
+  }
+
+  async addressTransactionList(
+    address: Address,
+    protocolType?: ProtocolType,
+    symbol?: string,
+    startBlockHeigh?: string,
+    endBlockHeight?: string,
+    isFromOrTo?: string,
+    page?: string,
+    limit?: string
+  ) {
+    const params = new URLSearchParams({
+      chainShortName: chainShortName,
+      address: address,
+    });
+    if (!!protocolType) {
+      params.append("protocolType", protocolType.toString());
+    }
+    if (!!symbol) {
+      params.append("symbol", symbol);
+    }
+    if (!!startBlockHeigh) {
+      params.append("startBlockHeigh", startBlockHeigh);
+    }
+    if (!!endBlockHeight) {
+      params.append("endBlockHeight", endBlockHeight);
+    }
+    if (!!isFromOrTo) {
+      params.append("isFromOrTo", isFromOrTo);
+    }
+    if (!!page) {
+      params.append("page", page);
+    }
+    if (!!limit) {
+      params.append("limit", limit);
+    }
+    const url = `${this.baseUrl}api/v5/explorer/address/transaction-list?${params}`;
+    const response = await fetch(url, {
+      headers: this.header(),
+    });
+    return response.json();
+  }
+
+  async addressNormalTransactionList(
+    address: Address,
+    startBlockHeigh?: string,
+    endBlockHeight?: string,
+    isFromOrTo?: string,
+    page?: string,
+    limit?: string
+  ) {
+    const params = new URLSearchParams({
+      chainShortName: chainShortName,
+      address: address,
+    });
+    if (!!startBlockHeigh) {
+      params.append("startBlockHeigh", startBlockHeigh);
+    }
+    if (!!endBlockHeight) {
+      params.append("endBlockHeight", endBlockHeight);
+    }
+    if (!!isFromOrTo) {
+      params.append("isFromOrTo", isFromOrTo);
+    }
+    if (!!page) {
+      params.append("page", page);
+    }
+    if (!!limit) {
+      params.append("limit", limit);
+    }
+    const url = `${this.baseUrl}api/v5/explorer/address/normal-transaction-list?${params}`;
+    const response = await fetch(url, {
+      headers: this.header(),
+    });
+    return response.json();
+  }
+
+  async addressInternalTransactionList(
+    address: Address,
+    startBlockHeigh?: string,
+    endBlockHeight?: string,
+    isFromOrTo?: string,
+    page?: string,
+    limit?: string
+  ) {
+    const params = new URLSearchParams({
+      chainShortName: chainShortName,
+      address: address,
+    });
+    if (!!startBlockHeigh) {
+      params.append("startBlockHeigh", startBlockHeigh);
+    }
+    if (!!endBlockHeight) {
+      params.append("endBlockHeight", endBlockHeight);
+    }
+    if (!!isFromOrTo) {
+      params.append("isFromOrTo", isFromOrTo);
+    }
+    if (!!page) {
+      params.append("page", page);
+    }
+    if (!!limit) {
+      params.append("limit", limit);
+    }
+    const url = `${this.baseUrl}api/v5/explorer/address/internal-transaction-list?${params}`;
+    const response = await fetch(url, {
+      headers: this.header(),
+    });
+    return response.json();
+  }
+
+  async addressTokenTransactionList(
+    address: Address,
+    protocolType: ProtocolType,
+    tokenContractAddress?: Address,
+    page?: string,
+    limit?: string
+  ) {
+    const params = new URLSearchParams({
+      chainShortName: chainShortName,
+      address: address,
+      protocolType: protocolType.toString(),
+    });
+    if (!!tokenContractAddress) {
+      params.append("tokenContractAddress", tokenContractAddress);
+    }
+    if (!!page) {
+      params.append("page", page);
+    }
+    if (!!limit) {
+      params.append("limit", limit);
+    }
+    const url = `${this.baseUrl}api/v5/explorer/address/token-transaction-list?${params}`;
     const response = await fetch(url, {
       headers: this.header(),
     });

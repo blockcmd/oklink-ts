@@ -3,23 +3,14 @@ import { Oklink } from './src/oklink'
 import { Config } from './config'
 import { Address } from './src/types/Address'
 import { ProtocolType } from './src/types/ProtocolType';
-
+import * as util from 'util'
 const oklink = new Oklink(Config.apiKey || "")
 
 // Test get addressInfo
-oklink.addressBalanceDetails(Config.test1 as Address, ProtocolType.token_20)
+oklink.addressTokenBalance(Config.test1 as Address, ProtocolType.token_20)
   .then(result => {
-    console.log(result);
+    console.log(util.inspect(result, { depth: null })); // Use 'util.inspect' with the correct syntax
   })
   .catch(error => {
     console.error(error);
   });
-
-// Test get evmAddressInfo
-// oklink.evmAddressInfo(Config.test1 as Address)
-//   .then(result => {
-//     console.log(result);
-//   })
-//   .catch(error => {
-//     console.error(error);
-//   });
