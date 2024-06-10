@@ -13,3 +13,12 @@ oklink.addressInfo(Config.test1 as Address)
   .catch(error => {
     console.error(error);
   });
+
+// Test get evmAddressInfo
+oklink.evmAddressInfo(Config.test1 as Address)
+  .then(result => {
+    console.log(result);
+  })
+  .catch(error => {
+    console.error(error);
+  });

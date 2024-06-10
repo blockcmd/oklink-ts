@@ -34,4 +34,16 @@ export class Oklink {
     })
     return response.json();
   }
+
+  async evmAddressInfo(address: Address) {
+    const params = new URLSearchParams({
+      'chainShortName': chainShortName,
+      'address': address,
+    });
+    const url = `${this.baseUrl}api/v5/explorer/address/information-evm?${params}`
+    const response = await fetch(url, {
+      headers: this.header()
+    })
+    return response.json();
+  }
 }
