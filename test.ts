@@ -7,7 +7,7 @@ import { ProtocolType } from './src/types/ProtocolType';
 const oklink = new Oklink(Config.apiKey || "")
 
 // Test get addressInfo
-oklink.addressTokenBalance(Config.test1 as Address, ProtocolType.token_20)
+oklink.addressBalanceDetails(Config.test1 as Address, ProtocolType.token_20)
   .then(result => {
     console.log(result);
   })

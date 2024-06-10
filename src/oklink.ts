@@ -4,12 +4,8 @@ const chainFullName = "KLAYTN";
 const chainShortName = "KLAYTN";
 
 import { Address } from "./types/Address";
+import { ProtocolType } from "./types/ProtocolType";
 
-enum ProtocolType {
-  token_20,
-  token_721,
-  token_1155,
-}
 
 export class Oklink {
   apiKey: string;
@@ -87,6 +83,34 @@ export class Oklink {
       params.append("limit", limit);
     }
     const url = `${this.baseUrl}api/v5/explorer/address/token-balance?${params}`;
+    const response = await fetch(url, {
+      headers: this.header(),
+    });
+    return response.json();
+  }
+
+  async addressBalanceDetails(
+    address: Address,
+    protocolType: ProtocolType,
+    tokenContractAddress?: Address,
+    page?: string,
+    limit?: string
+  ) {
+    const params = new URLSearchParams({
+      chainShortName: chainShortName,
+      address: address,
+      protocolType: protocolType.toString(),
+    });
+    if (!!tokenContractAddress) {
+      params.append("tokenContractAddress", tokenContractAddress);
+    }
+    if (!!page) {
+      params.append("page", page);
+    }
+    if (!!limit) {
+      params.append("limit", limit);
+    }
+    const url = `${this.baseUrl}api/v5/explorer/address/address-balance-fills?${params}`;
     const response = await fetch(url, {
       headers: this.header(),
     });
