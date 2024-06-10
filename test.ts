@@ -7,7 +7,7 @@ import * as util from 'util'
 const oklink = new Oklink(Config.apiKey || "")
 
 // Test get addressInfo
-oklink.richList()
+oklink.nativeTokenRanking()
   .then(result => {
     console.log(util.inspect(result, { depth: null })); // Use 'util.inspect' with the correct syntax
   })

@@ -461,4 +461,24 @@ export class Oklink {
     });
     return response.json();
   }
+
+  async nativeTokenRanking(
+    page?: string,
+    limit?: string,
+  ) {
+    const params = new URLSearchParams({
+      chainShortName: chainShortName,
+    });
+    if (!!page) {
+      params.append("page", page);
+    }
+    if (!!limit) {
+      params.append("limit", limit);
+    }
+    const url = `${this.baseUrl}api/v5/explorer/address/native-token-position-list?${params}`;
+    const response = await fetch(url, {
+      headers: this.header(),
+    });
+    return response.json();
+  }
 }
