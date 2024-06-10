@@ -24,7 +24,11 @@ export class Oklink {
   }
 
   async addressInfo(address: Address) {
-    const url = `${this.baseUrl}api/v5/explorer/address/address-summary?chainShortName=${chainShortName}&address=${address}`
+    const params = new URLSearchParams({
+      'chainShortName': chainShortName,
+      'address': address,
+    });
+    const url = `${this.baseUrl}api/v5/explorer/address/address-summary?${params}`
     const response = await fetch(url, {
       headers: this.header()
     })
