@@ -7,7 +7,7 @@ import * as util from 'util'
 const oklink = new Oklink(Config.apiKey || "")
 
 // Test get addressInfo
-oklink.addressTokenBalance(Config.test1 as Address, ProtocolType.token_20)
+oklink.richList()
   .then(result => {
     console.log(util.inspect(result, { depth: null })); // Use 'util.inspect' with the correct syntax
   })

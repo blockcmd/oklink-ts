@@ -330,4 +330,135 @@ export class Oklink {
     });
     return response.json();
   }
+
+  async batchAddressNormalTransactionList(
+    addresses: Address[],
+    startBlockHeigh?: string,
+    endBlockHeight?: string,
+    isFromOrTo?: string,
+    page?: string,
+    limit?: string
+  ) {
+    if (addresses.length > 50) {
+      throw new Error("The maximum number of addresses is 50");
+    }
+    const params = new URLSearchParams({
+      chainShortName: chainShortName,
+      addresses: addresses.join(","),
+    });
+    if (!!startBlockHeigh) {
+      params.append("startBlockHeigh", startBlockHeigh);
+    }
+    if (!!endBlockHeight) {
+      params.append("endBlockHeight", endBlockHeight);
+    }
+    if (!!isFromOrTo) {
+      params.append("isFromOrTo", isFromOrTo);
+    }
+    if (!!page) {
+      params.append("page", page);
+    }
+    if (!!limit) {
+      params.append("limit", limit);
+    }
+    const url = `${this.baseUrl}api/v5/explorer/address/normal-transaction-list-multi?${params}`;
+    const response = await fetch(url, {
+      headers: this.header(),
+    });
+    return response.json();
+  }
+
+  async batchAddressInternalTransactionList(
+    addresses: Address[],
+    startBlockHeigh?: string,
+    endBlockHeight?: string,
+    isFromOrTo?: string,
+    page?: string,
+    limit?: string
+  ) {
+    if (addresses.length > 20) {
+      throw new Error("The maximum number of addresses is 20");
+    }
+    const params = new URLSearchParams({
+      chainShortName: chainShortName,
+      addresses: addresses.join(","),
+    });
+    if (!!startBlockHeigh) {
+      params.append("startBlockHeigh", startBlockHeigh);
+    }
+    if (!!endBlockHeight) {
+      params.append("endBlockHeight", endBlockHeight);
+    }
+    if (!!isFromOrTo) {
+      params.append("isFromOrTo", isFromOrTo);
+    }
+    if (!!page) {
+      params.append("page", page);
+    }
+    if (!!limit) {
+      params.append("limit", limit);
+    }
+    const url = `${this.baseUrl}api/v5/explorer/address/internal-transaction-list-multi?${params}`;
+    const response = await fetch(url, {
+      headers: this.header(),
+    });
+    return response.json();
+  }
+
+  async batchAddressTokenTransactionList(
+    addresses: Address[],
+    startBlockHeigh: string,
+    endBlockHeight: string,
+    page?: string,
+    limit?: string,
+    protocolType?: ProtocolType,
+    tokenContractAddress?: Address,
+    isFromOrTo?: string
+  ) {
+    if (addresses.length > 20) {
+      throw new Error("The maximum number of addresses is 20");
+    }
+    const params = new URLSearchParams({
+      chainShortName: chainShortName,
+      addresses: addresses.join(","),
+      startBlockHeigh: startBlockHeigh,
+      endBlockHeight: endBlockHeight,
+    });
+    if (!!page) {
+      params.append("page", page);
+    }
+    if (!!limit) {
+      params.append("limit", limit);
+    }
+    if (!!protocolType) {
+      params.append("protocolType", protocolType);
+    }
+    if (!!tokenContractAddress) {
+      params.append("tokenContractAddress", tokenContractAddress);
+    }
+    if (!!isFromOrTo) {
+      params.append("isFromOrTo", isFromOrTo);
+    }
+    const url = `${this.baseUrl}api/v5/explorer/address/token-transaction-list-multi?${params}`;
+    const response = await fetch(url, {
+      headers: this.header(),
+    });
+    return response.json();
+  }
+
+  async richList(
+    address?: Address,
+  ) {
+    const params = new URLSearchParams({
+      chainShortName: chainShortName,
+    });
+    if (!!address) {
+      params.append("address", address);
+    }
+    const url = `${this.baseUrl}api/v5/explorer/address/rich-list?${params}`;
+    const response = await fetch(url, {
+      headers: this.header(),
+    });
+    return response.json();
+  }
 }
