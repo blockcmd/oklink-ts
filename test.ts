@@ -1,6 +1,6 @@
 import { Oklink } from "./src/oklink";
 // For testing, I use config.ts file to store configurations like API key and test addresses
-import { Config } from "./config";
+import { Config } from "./config.example";
 import { Address } from "./src/types/Address";
 import { ProtocolType } from "./src/types/ProtocolType";
 import * as util from "util";

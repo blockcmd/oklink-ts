@@ -10,6 +10,7 @@ export interface AddressData {
   address: string;
   contractAddress: string;
   balance: string;
+  nonce: string;
   balanceSymbol: string;
   transactionCount: string;
   verifying: string;
