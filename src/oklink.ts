@@ -1,16 +1,13 @@
 import { Address } from "./types/Address";
 import { ProtocolType } from "./types/ProtocolType";
 import { AddressInformation } from "./interfaces/AddressInformationResponse";
+import { ApiResponse } from "./interfaces/AddressInformationResponse";
 
 const BASE_URL = "https://www.oklink.com/";
 const chainId = "8217";
 const chainFullName = "KLAYTN";
 const chainShortName = "KLAYTN";
-interface ApiResponse<T> {
-  code: number;
-  data: T;
-  msg: string;
-}
+
 export class Oklink {
   apiKey: string;
   baseUrl: string;
